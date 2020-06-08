@@ -8,6 +8,8 @@
 nav {
   padding: 20px;
   background-color: black;
+  position: fixed;
+  width: 100%;
 }
 
 .branding {
@@ -44,4 +46,49 @@ nav {
   border-bottom-right-radius: 5px;
   background-color: rgb(206, 206, 206);
   cursor: pointer;
+}
+
+/* MAIN */
+main {
+  display: flex;
+  padding-top: 40px;
+}
+
+.poster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  background-color: red;
+  height: 100vh;
+}
+
+.details {
+  padding-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  width: 50vw;
+  background-color: cyan;
+  height: 100vh;
+  align-items: center;
+  font-family: "Courier New", Courier, monospace;
+}
+.answer {
+  color: rgb(43, 42, 42);
+}
+
+span {
+  font-size: 1.3rem;
+  color: black;
+}
+
+/* MAKING EVERYTHING RESPONSIVE */
+@media only screen and (max-width: 650px) {
+  .posterImage {
+    width: 250px;
+    height: 350px;
+  }
 }
