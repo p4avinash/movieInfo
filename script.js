@@ -46,7 +46,7 @@ searchButton.addEventListener("click", () => {
     metacritic.removeChild(metacritic.childNodes[1]);
   }
   const movie = searchField.value;
-  fetch(`http://www.omdbapi.com/?t=${movie}&apikey=5e322a32`)
+  fetch(`https://www.omdbapi.com/?t=${movie}&apikey=5e322a32`)
     .then((response) => {
       return response.json();
     })
