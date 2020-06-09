@@ -26,10 +26,9 @@ const plot = document.querySelector(".plot");
 //flag
 var count = 0;
 
-searchButton.addEventListener("click", () => {
+const fetInfo = () => {
   if (count > 0) {
     //clearing everything for the repaint
-
     movieTitle.removeChild(movieTitle.childNodes[1]);
     release.removeChild(release.childNodes[1]);
     type.removeChild(type.childNodes[1]);
@@ -104,9 +103,18 @@ searchButton.addEventListener("click", () => {
           document.createTextNode(response2["Ratings"][2].Value)
         );
       }
-    })
-    .catch((error) => console.log(error));
+    });
   //clearing the searchfield
   searchField.value = "";
   count = 0;
+};
+
+//adding click functionality
+searchButton.addEventListener("click", fetInfo);
+
+//adding keypress functionality
+searchField.addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {
+    fetInfo();
+  }
 });
