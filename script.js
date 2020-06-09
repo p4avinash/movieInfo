@@ -57,7 +57,6 @@ const fetInfo = () => {
       if (response2.Response === "False") {
         alert("Movie not found!");
       } else {
-        console.log(response2);
         //incrementing the count
         count += 1;
         //setting up the poster
