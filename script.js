@@ -22,12 +22,14 @@ const imdbvotes = document.querySelector(".imdbvotes");
 const imdbrating = document.querySelector(".imdbrating");
 const rotten = document.querySelector(".rotten");
 const metacritic = document.querySelector(".metacritic");
+const plot = document.querySelector(".plot");
 //flag
 var count = 0;
 
 searchButton.addEventListener("click", () => {
   if (count > 0) {
     //clearing everything for the repaint
+
     movieTitle.removeChild(movieTitle.childNodes[1]);
     release.removeChild(release.childNodes[1]);
     type.removeChild(type.childNodes[1]);
@@ -44,7 +46,9 @@ searchButton.addEventListener("click", () => {
     imdbrating.removeChild(imdbrating.childNodes[1]);
     rotten.removeChild(rotten.childNodes[1]);
     metacritic.removeChild(metacritic.childNodes[1]);
+    plot.removeChild(plot.childNodes[1]);
   }
+
   const movie = searchField.value;
   fetch(`https://www.omdbapi.com/?t=${movie}&apikey=5e322a32`)
     .then((response) => {
@@ -53,51 +57,56 @@ searchButton.addEventListener("click", () => {
     .then((response2) => {
       if (response2.Response === "False") {
         alert("Movie not found!");
+      } else {
+        console.log(response2);
+        //incrementing the count
+        count += 1;
+        //setting up the poster
+        image.src = response2.Poster;
+        //setting up the movie title
+        movieTitle.appendChild(document.createTextNode(response2.Title));
+        //release date
+        release.appendChild(document.createTextNode(response2.Released));
+        //type
+        type.appendChild(document.createTextNode(response2.Type));
+        //runtime
+        runtime.appendChild(document.createTextNode(response2.Runtime));
+        //actors
+        actors.appendChild(document.createTextNode(response2.Actors));
+        //awards
+        awards.appendChild(document.createTextNode(response2.Awards));
+        //country
+        country.appendChild(document.createTextNode(response2.Country));
+        //director
+        director.appendChild(document.createTextNode(response2.Director));
+        //genre
+        genre.appendChild(document.createTextNode(response2.Genre));
+        //language
+        language.appendChild(document.createTextNode(response2.Language));
+        //metascore
+        metascore.appendChild(document.createTextNode(response2.Metascore));
+        //writers
+        writers.appendChild(document.createTextNode(response2.Writer));
+        //plot
+        plot.appendChild(document.createTextNode(response2.Plot));
+        //imdb votes
+        imdbvotes.appendChild(document.createTextNode(response2.imdbVotes));
+        //imdb rating
+        imdbrating.appendChild(
+          document.createTextNode(response2["Ratings"][0].Value)
+        );
+        //rotten tomatoes rating
+        rotten.appendChild(
+          document.createTextNode(response2["Ratings"][1].Value)
+        );
+        //metacritic rating
+        metacritic.appendChild(
+          document.createTextNode(response2["Ratings"][2].Value)
+        );
       }
-      console.log(response2);
-      //incrementing the count
-      count += 1;
-      //setting up the poster
-      image.src = response2.Poster;
-      //setting up the movie title
-      movieTitle.appendChild(document.createTextNode(response2.Title));
-      //release date
-      release.appendChild(document.createTextNode(response2.Released));
-      //type
-      type.appendChild(document.createTextNode(response2.Type));
-      //runtime
-      runtime.appendChild(document.createTextNode(response2.Runtime));
-      //actors
-      actors.appendChild(document.createTextNode(response2.Actors));
-      //awards
-      awards.appendChild(document.createTextNode(response2.Awards));
-      //country
-      country.appendChild(document.createTextNode(response2.Country));
-      //director
-      director.appendChild(document.createTextNode(response2.Director));
-      //genre
-      genre.appendChild(document.createTextNode(response2.Genre));
-      //language
-      language.appendChild(document.createTextNode(response2.Language));
-      //metascore
-      metascore.appendChild(document.createTextNode(response2.Metascore));
-      //writers
-      writers.appendChild(document.createTextNode(response2.Writer));
-      //imdb votes
-      imdbvotes.appendChild(document.createTextNode(response2.imdbVotes));
-      //imdb rating
-      imdbrating.appendChild(
-        document.createTextNode(response2["Ratings"][0].Value)
-      );
-      //rotten tomatoes rating
-      rotten.appendChild(
-        document.createTextNode(response2["Ratings"][1].Value)
-      );
-      //metacritic rating
-      metacritic.appendChild(
-        document.createTextNode(response2["Ratings"][2].Value)
-      );
-      //clearing the searchfield
-      searchField.value = "";
-    });
+    })
+    .catch((error) => console.log(error));
+  //clearing the searchfield
+  searchField.value = "";
+  count = 0;
 });
